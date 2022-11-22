@@ -1,6 +1,6 @@
-# mclogs host
-host: 'mclo.gs'
-# mclogs API host
-api-host: 'api.mclo.gs'
-# protocol used to interact with the mclogs API
+# host
+host: 'log.mcnavody.eu'
+# API host
+api-host: 'api.log.mcnavody.eu'
+# protocol used to interact with API
 protocol: 'https'

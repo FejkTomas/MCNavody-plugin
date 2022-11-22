@@ -32,7 +32,7 @@ public class MclogsBukkitLoader extends JavaPlugin {
             logger.log(Level.SEVERE,"Unable to find server directory!", e);
             return;
         }
-        this.getCommand("mclogs").setExecutor(new CommandMclogs(this));
+        this.getCommand("log").setExecutor(new CommandMclogs(this));
     }
 
     private String loadRunDir() {

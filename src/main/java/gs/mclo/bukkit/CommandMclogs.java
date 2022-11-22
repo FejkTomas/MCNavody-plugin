@@ -40,11 +40,11 @@ public class CommandMclogs implements CommandExecutor, TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if (args.length == 0) {
-            if (sender.hasPermission("mclogs.upload")) {
+            if (sender.hasPermission("mcn.upload")) {
                 share(sender,"latest.log");
             }
             else {
-                sender.sendMessage(ChatColor.RED + "You don't have the permission to use the command!");
+                sender.sendMessage(ChatColor.RED + "MCN" + ChatColor.DARK_GRAY + " » " + ChatColor.RED + "K použití příkazu nemáte oprávnění!");
             }
             return true;
         }
@@ -52,7 +52,7 @@ public class CommandMclogs implements CommandExecutor, TabExecutor {
         SubCommand subCommand = subCommands.get(args[0]);
         if (subCommand == null) return false;
         if (subCommand.getPermission() != null && !sender.hasPermission(subCommand.getPermission())) {
-            sender.sendMessage(ChatColor.RED + "You don't have the permissions required to execute this command.");
+            sender.sendMessage(ChatColor.RED + "MCN" + ChatColor.DARK_GRAY + " » " + ChatColor.RED + "K provedení tohoto příkazu nemáte potřebná oprávnění.");
             return true;
         }
         return subCommand.onCommand(sender, command, s, Arrays.copyOfRange(args, 1, args.length));
@@ -60,7 +60,7 @@ public class CommandMclogs implements CommandExecutor, TabExecutor {
 
     public void share(CommandSender commandSender, String file) {
         Logger logger = plugin.getLogger();
-        logger.log(Level.INFO, "Sharing " + file + "...");
+        logger.log(Level.INFO, "Sdílení souboru " + file + "...");
 
         Path directory = Paths.get(plugin.getRunDir());
         Path logs = directory.resolve("logs");
@@ -81,30 +81,30 @@ public class CommandMclogs implements CommandExecutor, TabExecutor {
 
         if (!log.toFile().exists() || !isInAllowedDirectory
                 || !log.getFileName().toString().matches(Log.ALLOWED_FILE_NAME_PATTERN.pattern())) {
-            commandSender.sendMessage(ChatColor.RED + "There is no log or crash report with the name '" + file
-                    + "'. Use '/mclogs list' to list all logs.");
+            commandSender.sendMessage(ChatColor.RED + "MCN" + ChatColor.DARK_GRAY + " » " + ChatColor.RED + "Neexistuje žádný log nebo crash report s názvem '" + file
+                    + "'. Pro zobrazení všech logů použij příkaz '/log list'.");
             return;
         }
 
         try {
             APIResponse response = MclogsAPI.share(log);
             if (response.success) {
-                commandSender.sendMessage(ChatColor.GREEN + "Your log has been uploaded: " + ChatColor.BLUE + this.getMclogsURL(response.id));
+                commandSender.sendMessage(ChatColor.RED + "MCN" + ChatColor.DARK_GRAY + " » " + ChatColor.GRAY + "Tvůj log byl nahrán na \n" + ChatColor.GREEN + this.getMclogsURL(response.id));
             }
             else {
-                commandSender.sendMessage(ChatColor.RED + "An error occurred. Check your log for more details");
-                logger.log(Level.SEVERE,"An error occurred while uploading your log: " + response.error);
+                commandSender.sendMessage(ChatColor.RED + "MCN" + ChatColor.DARK_GRAY + " » " + ChatColor.RED + "Došlo k chybě. Podívej se do logu na další podrobnosti");
+                logger.log(Level.SEVERE,"Při nahrávání logu došlo k chybě: " + response.error);
             }
         }
         catch (IOException e) {
-            commandSender.sendMessage(ChatColor.RED + "An error occurred. Check your log for more details");
-            logger.log(Level.SEVERE,"An error occurred while reading your log", e);
+            commandSender.sendMessage(ChatColor.RED + "MCN" + ChatColor.DARK_GRAY + " » " + ChatColor.RED + "Došlo k chybě. Podívej se do logu na další podrobnosti");
+            logger.log(Level.SEVERE,"Při čtení logu došlo k chybě", e);
         }
     }
 
     public String getMclogsURL(String id) {
         String protocol = plugin.getConfig().get("protocol", "https").toString();
-        String host = plugin.getConfig().get("host", "mclo.gs").toString();
+        String host = plugin.getConfig().get("host", "log.mcnavody.eu").toString();
         return protocol + "://" + host + "/" + id;
     }
 

@@ -19,31 +19,31 @@ public class MclogsListCommand extends SubCommand {
 
     @Override
     String getPermission() {
-        return "mclogs.list";
+        return "mcn.list";
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         TextComponent message = new TextComponent();
 
-        TextComponent logsHeader = new TextComponent("Available logs:");
+        TextComponent logsHeader = new TextComponent("Dostupné logy:");
         logsHeader.setBold(true);
         logsHeader.setColor(ChatColor.GREEN);
         message.addExtra(logsHeader);
         for (String log : mclogs.listLogs()) {
             TextComponent entry = new TextComponent("\n" + log);
-            entry.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/mclogs share " + log));
+            entry.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/log share " + log));
             entry.setBold(false);
             message.addExtra(entry);
         }
 
-        TextComponent crashReportsHeader = new TextComponent("\nAvailable crash reports:");
+        TextComponent crashReportsHeader = new TextComponent("\nDostupné crash reporty:");
         crashReportsHeader.setBold(true);
         crashReportsHeader.setColor(ChatColor.GREEN);
         message.addExtra(crashReportsHeader);
         for (String crashReport : mclogs.listCrashReports()) {
             TextComponent entry = new TextComponent("\n" + crashReport);
-            entry.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/mclogs share " + crashReport));
+            entry.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/log share " + crashReport));
             entry.setBold(false);
             message.addExtra(entry);
         }
