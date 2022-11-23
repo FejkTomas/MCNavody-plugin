@@ -4,6 +4,9 @@ plugins {
     id "com.modrinth.minotaur" version "2.+"
 }
 
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
 version = project.hasProperty('release') ? project.getProperty('release') : 'dev'
 
 repositories {
