@@ -7,6 +7,9 @@ jako jsou IP adresy, jsou automaticky skryty, aby byla zajištěna bezpečnost a
 ### Stažení
 - [GitHub Releases](https://github.com/fejby/MCNavody-plugin/releases)
 
+### Požadavky
+- Java 8+
+- Minecraft 1.8+
 
 ### Commands
 ```
