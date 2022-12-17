@@ -1,4 +1,4 @@
-# MC Návody plugin
+![banner](https://i.imgur.com/oNb3YaX.png)
 
 Pomocí tohoto doplňku můžete nahrát log serveru Minecraft na náš [pastebin](https://log.mcnavody.eu) přímo ze svého serveru.
 pomocí jednoho jednoduchého příkazu. Dokonce je možné exportovat staré soubory serverového logu, např. po pádu. Citlivé informace
